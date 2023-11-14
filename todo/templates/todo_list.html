@@ -1,15 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome page</title>
-    <h1>Hello!</h1>
-    <body>
-        This is the Hello page, we will work towards developing the restaurant management
-    </body>
+    <title>Welcome to Our Restaurant Management System</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+<!-- https://www.beefeater.co.uk/en-gb/main-menu/beefeater_main_menu_band4.pdf -->
 <body>
+    <header>
+        <h1 class="title">Welcome to {{ name }}'s Restaurant</h1>
+    </header>
+    <section>
+        <h1>Hello, {{ name }} from {{ location }}</h1>
+        <a href="https://www.beefeater.co.uk/en-gb/main-menu/beefeater_main_menu_band4.pdf" target="_blank">
+            <button>View Menu</button>
+        </a>
+        <p>Please select your choice</p>
+    </section>
+    <footer>
+        <p>&copy; 2023 Restaurant Management System</p>
+    </footer>
     
 </body>
 </html>
