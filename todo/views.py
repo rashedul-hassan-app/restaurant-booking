@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 
 def say_hello(request):
-    return render(request, 'todo_list.html')
+    return render(request, 'todo_list.html', {'name': 'Gordon Ramsey', 'location': 'uk'})
 
 
 def index(request):
