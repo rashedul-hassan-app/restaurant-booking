@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create Booking</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% for date in dates %}
+    <fieldset>
+        <legend>Available Slots for {{ date.date }}</legend>
+        {% for slot in date.time_slots.all %}
+        <div>
+            <input type="radio" id="slot{{ slot.id }}" name="booking_slot" value="{{ slot.id }}">
+            <label for="slot{{ slot.id }}">{{ slot.time }}</label>
+        </div>
+        {% endfor %}
+        </fieldset>
+    {% endfor %}
+
+    <button type="submit">Book</button>
+</form>
+
+{% endblock %}
