@@ -23,4 +23,11 @@
     </div>
 </div>
 
+{% for booking in bookings %}
+<div>
+    <p>Date: {{ booking.timeslot.date.date }}</p>
+    <p>Time Slot: {{ booking.timeslot.time }}</p>
+</div>
+
+{% endfor %}
 {% endblock %}

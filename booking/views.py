@@ -3,18 +3,21 @@ from .models import BookingDate, Booking, TimeSlot
 from .forms import TimeSlotForm
 from django.contrib import messages
 from datetime import date, timedelta
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+@login_required
 def view_all(request):
-    return render(request, 'booking/view_all.html')
+    user_bookings = Booking.objects.filter(user=request.user)
+    return render(request, 'booking/view_all.html', {'bookings': user_bookings})
 
 
 def create_booking(request):
     if request.method == 'POST':
         timeslot_id = request.POST.get('booking_slot')
         timeslot = TimeSlot.objects.get(id=timeslot_id)
-        Booking.objects.create(timeslot=timeslot)
+        Booking.objects.create(user=request.user, timeslot=timeslot)
         messages.success(request, 'Booking created successfully!')
         return redirect('booking_page')
 
