@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import BookingDate, Booking, TimeSlot
 from .forms import TimeSlotForm
+from django.contrib import messages
 # Create your views here.
 
 
@@ -13,6 +14,7 @@ def create_booking(request):
         timeslot_id = request.POST.get('booking_slot')
         timeslot = TimeSlot.objects.get(id=timeslot_id)
         Booking.objects.create(timeslot=timeslot)
+        messages.success(request, 'Booking created successfully!')
         return redirect('booking_page')
 
     dates = BookingDate.objects.all().prefetch_related('time_slots')
@@ -24,6 +26,7 @@ def add_timeslot(request):
         form = TimeSlotForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Time slot added successfully!')
             return redirect('booking_page')
     else:
         form = TimeSlotForm()

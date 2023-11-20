@@ -3,6 +3,12 @@
 {% block content %}
 <h2>Welcome to the booking system</h2>
 
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
 <div class="column">
     <div>
         <section>Customers</section>
