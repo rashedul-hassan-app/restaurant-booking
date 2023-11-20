@@ -16,7 +16,7 @@ class TimeSlot(models.Model):
         BookingDate, related_name='time_slots', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.date.date} at {self.time.strftime('$H:%M')}"
+        return f"{self.date.date} at {self.time.strftime('%H:%M')}"
 
 
 class Booking(models.Model):

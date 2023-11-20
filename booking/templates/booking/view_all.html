@@ -2,4 +2,19 @@
 
 {% block content %}
 <h2>Welcome to the booking system</h2>
+
+<div class="column">
+    <div>
+        <section>Customers</section>
+        <p>Make a reservation</p>
+        <a href="{% url 'create_booking'%}">Book</a>
+    </div>
+    
+    <div>
+        <section>Admin</section>
+        <p>Add a TimeSlot</p>
+        <a href="{% url 'add_timeslot'%}">Add</a>
+    </div>
+</div>
+
 {% endblock %}
