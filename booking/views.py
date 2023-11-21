@@ -40,7 +40,10 @@ def edit_booking(request, booking_id):
 
 
 def delete_booking(request, booking_id):
-    pass
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    booking.delete()
+    messages.success(request, 'Booking Cancelled Successfully!')
+    return redirect('booking_page')
 
 
 def add_timeslot(request):

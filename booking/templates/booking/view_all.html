@@ -29,7 +29,7 @@
     <p>Time Slot: {{ booking.timeslot.time }}</p>
     <a href="{% url 'edit_booking' booking.id %}">Edit</a>
 
-    <a href="{% url 'delete_booking' booking.id %}">Delete</a>
+    <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to cancel your Booking?')">Delete</a>
 </div>
 
 {% endfor %}
