@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from todo.views import signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +24,5 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),  # login stuff
     path('booking/', include('booking.urls'), name='booking'),
+    path('signup/', signup, name='signup')
 ]

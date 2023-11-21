@@ -16,7 +16,13 @@
   <main>
     <a href="{% url 'home'%}">Home</a>
     <a href="https://www.beefeater.co.uk/en-gb/main-menu/beefeater_main_menu_band4.pdf" target="_blank">Menu</a>
+    
+    {% if user.is_authenticated %}
+    <p>{{ user.username }}<a href="{% url 'logout' %}">Log out</a></p>
+    {% else %}
     <a href="{% url 'login' %}">Login/Sign up</a>
+    {% endif %}
+
     <a href="{% url 'booking_page' %}">Booking</a>
     {% block content %}
     {% endblock %}
