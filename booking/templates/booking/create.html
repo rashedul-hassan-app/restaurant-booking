@@ -3,22 +3,32 @@
 {% block content %}
 <h2>Create Booking</h2>
 
+{% if messages %}
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
 
     {% for date in dates %}
         {% if date.time_slots.all %}
         <fieldset>
-            <legend>Available Slots for {{ date.date }}</legend>
-                {% for slot in date.time_slots.all %}
-                <div>
-                    <input type="radio" id="slot{{ slot.id }}" name="booking_slot" value="{{ slot.id }}">
-                    <label for="slot{{ slot.id }}">{{ slot.time }}</label>
-                </div>
-                {% endfor %}
+            {% for slot in date.time_slots.all %}
+            {% if slot.id not in booked_slots %}
+                <legend>Available Slots for {{ date.date }}</legend>
+                    <div>
+                        <input type="radio" id="slot{{ slot.id }}" name="booking_slot" value="{{ slot.id }}">
+                        <label for="slot{{ slot.id }}">{{ slot.time }}</label>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </fieldset>
         {% endif %}
+
     {% endfor %}
+    <p>Try again tomorrow for more slots</p>
 
     <button type="submit">Book</button>
 </form>
