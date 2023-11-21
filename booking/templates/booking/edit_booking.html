@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit Booking</h2>
+
+{% if messages %}
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<a href="{% url 'booking_page' %}">Back to Booking</a>
+<form method="post" action="{% url 'edit_booking' booking_id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update my Booking</button>
+</form>
+{% endblock %}

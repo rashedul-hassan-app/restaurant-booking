@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import BookingDate, Booking, TimeSlot
-from .forms import TimeSlotForm
+from .forms import TimeSlotForm, BookingForm
 from django.contrib import messages
 from datetime import date, timedelta
 from django.contrib.auth.decorators import login_required
@@ -23,6 +23,24 @@ def create_booking(request):
 
     dates = BookingDate.objects.all().prefetch_related('time_slots')
     return render(request, 'booking/create.html', {'dates': dates})
+
+
+def edit_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Booking updated successfully!')
+            return redirect('booking_page')
+    else:
+        form = BookingForm(instance=booking)
+    return render(request, 'booking/edit_booking.html', {'form': form, 'booking_id': booking_id})
+
+
+def delete_booking(request, booking_id):
+    pass
 
 
 def add_timeslot(request):
