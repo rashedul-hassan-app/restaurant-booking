@@ -42,3 +42,9 @@ footer {
     gap: 20px;
     justify-content: center;
 }
+
+.booking-container {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+}
